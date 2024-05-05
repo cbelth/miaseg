@@ -1,0 +1,63 @@
+digraph {
+	node [shape=circle]
+	PL
+	GEN
+	PL -> GEN
+	PL
+	PSS3S
+	PL -> PSS3S
+	PL
+	DAT
+	PL -> DAT
+	PL
+	LOC
+	PL -> LOC
+	PL
+	ABL
+	PL -> ABL
+	PL
+	ACC
+	PL -> ACC
+	PL
+	PSS1P
+	PL -> PSS1P
+	PL
+	PSS2P
+	PL -> PSS2P
+	PL
+	PSS1S
+	PL -> PSS1S
+	PL
+	PSS2S
+	PL -> PSS2S
+	PSS1P
+	GEN
+	PSS1P -> GEN
+	PSS1P
+	ACC
+	PSS1P -> ACC
+	PSS1P
+	DAT
+	PSS1P -> DAT
+	PSS1P
+	LOC
+	PSS1P -> LOC
+	PSS1P
+	ABL
+	PSS1P -> ABL
+	GEN
+	PSS2S
+	GEN -> PSS2S
+	PSS2P
+	DAT
+	PSS2P -> DAT
+	PSS2P
+	LOC
+	PSS2P -> LOC
+	PSS2P
+	ABL
+	PSS2P -> ABL
+	PSS2S
+	DAT
+	PSS2S -> DAT
+}
