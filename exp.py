@@ -110,7 +110,7 @@ if __name__ == '__main__':
     parser.add_argument('--exp-name', '-e', type=str, required=True, help=exp_name_opts)
     parser.add_argument('--model', '-m', type=str, required=True, help=model_name_opts)
     parser.add_argument('--num_train', '-num_train', type=int, required=False, default=None)
-    parser.add_argument('--num_seeds', '-seeds', type=int, required=False, default=30)
+    parser.add_argument('--num_seeds', '-seeds', type=int, required=False, default=10)
     args = parser.parse_args()
 
     if args.exp_name not in exp_name_opts.split('|'):
