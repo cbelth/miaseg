@@ -26,7 +26,7 @@ The results files from the paper are in `results/`. If you want to reproduce the
     - By default 10
 ```
 
-For example, to reproduce <span style="font-variant:small-caps;">Miaseg</span>'s results on Turkish, you can run.
+For example, to reproduce <span style="font-variant:small-caps;">Miaseg</span>'s results on Turkish, you can run:
 
 ```python
 python exp.py -e tur -m miaseg
