@@ -73,6 +73,7 @@ class Exp:
             # eval model
             precision, recall, f1, acc, errs = model.evaluate(split, return_errors=True)
             self.write(seed, precision, recall, f1, acc, errs)
+            print(f'Acc: {round(acc, 3)} F1: {round(f1, 3)}')
 
         return self
     

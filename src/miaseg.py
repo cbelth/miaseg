@@ -11,7 +11,6 @@ class MIASEG(Model):
     def train(self, split):
         train = split.train
         self._init_paradigms(train)
-        print(f'Num Paradigms: {len(self.paradigms)}')
         self._order_morphemes()
 
     def segment(self, form, feats, with_analysis=False):
@@ -21,15 +20,14 @@ class MIASEG(Model):
         root_form = None
 
         prfxs, sufxs = self._get_affixes(feats)
-        if len(prfxs) > 0:
-            print(f'--- prfxs: {prfxs}')
-
         temp_form = f'{form}'
 
+
+        # handle sufxs
         sufx_ana = list()
         sufx_seg = list()
         for sufx in reversed(sufxs): # iterate over sufxs right-to-left
-            # grab possible forms of the sufx, and start with most frequent form
+            # grab possible forms of the sufx, starting with the longest form and breaking ties with frequency
             cand_forms = sorted(self.meaning_to_form[sufx].items(), reverse=True, key=lambda it: (len(it[0]), it[-1]))
             hit = False # track whether we've found a form that matches
             for cand, freq in cand_forms:
@@ -47,10 +45,32 @@ class MIASEG(Model):
                 sufx_seg.append(temp_form[-most_freq_len:])
                 temp_form = temp_form[:-most_freq_len]
 
+        # handle prfxs
+        prfx_ana = list()
+        prfx_seg = list()
+        for prfx in prfxs: # iterate over prfxs left-to-right
+            # grab possible forms of the prfx, starting with the longest form and breaking ties with frequency
+            cand_forms = sorted(self.meaning_to_form[prfx].items(), reverse=True, key=lambda it: (len(it[0]), it[-1]))
+            hit = False # track whether we've found a form that matches
+            for cand, freq in cand_forms:
+                if temp_form.endswith(cand): # check if the candidate form matches
+                    prfx_ana.append(prfx)
+                    prfx_seg.append(cand)
+                    temp_form = temp_form[len(cand):]
+                    hit = True
+                    break
+            
+            if not hit: # if no match, resort to length
+                lens = list(len(cand) for cand, _ in cand_forms)
+                most_freq_len = Counter(lens).most_common(1)[0][0]
+                prfx_ana.append(prfx)
+                prfx_seg.append(temp_form[:most_freq_len])
+                temp_form = temp_form[most_freq_len:]
+
         root_form = temp_form
 
-        ana = ['ROOT'] + list(reversed(sufx_ana))
-        seg = [root_form] + list(reversed(sufx_seg))
+        ana = prfx_ana + ['ROOT'] + list(reversed(sufx_ana))
+        seg = prfx_seg + [root_form] + list(reversed(sufx_seg))
 
         ana = '-'.join(ana)
         seg = '-'.join(seg)
