@@ -40,7 +40,7 @@ class MIASEG(Model):
                     hit = True
                     break
             
-            if not hit: # if not match, resort to length
+            if not hit: # if no match, resort to length
                 lens = list(len(cand) for cand, _ in cand_forms)
                 most_freq_len = Counter(lens).most_common(1)[0][0]
                 sufx_ana.append(sufx)
@@ -91,7 +91,6 @@ class MIASEG(Model):
                 
                 typ, form = self._get_marking_type_from_one_off(s1.form, s2.form), self._get_marking_from_one_off(s1.form, s2.form)
                 if typ and form:
-
                     # tabulate implied affix orderings
                     if typ == SUFFIX: # make a suffix come after any other marked affixes
                         for feat in s1.feats:
