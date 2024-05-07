@@ -108,7 +108,7 @@ if __name__ == '__main__':
     exp_name_opts = 'hun|mon|fin|tur'
     model_name_opts = 'miaseg|morfessor|transformer'
 
-    parser.add_argument('--exp-name', '-e', type=str, required=True, help=exp_name_opts)
+    parser.add_argument('--exp_name', '-e', type=str, required=True, help=exp_name_opts)
     parser.add_argument('--model', '-m', type=str, required=True, help=model_name_opts)
     parser.add_argument('--num_train', '-num_train', type=int, required=False, default=None)
     parser.add_argument('--num_seeds', '-seeds', type=int, required=False, default=10)
