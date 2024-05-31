@@ -62,6 +62,4 @@ If for some reason you really want to re-run the transformer comparison model, y
 ```
 ## Running on Your Own Data
 
-<span style="font-variant:small-caps;">Miaseg</span> will soon be implemented in the Python package [algophon](https://github.com/cbelth/algophon). This will make it easy to run the model on your own data. 
-
-Until then, please see `dataset.py` for how to load data and create train/test splits and see `miaseg.py` for how to run the model and use it to segment. For example data formats, see the files in `data/`.
+<span style="font-variant:small-caps;">Miaseg</span> is implemented in the Python package [algophon](https://github.com/cbelth/algophon). I recommend that implementation for running the model on your own data. Just `pip install algophon`!
